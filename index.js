@@ -2,10 +2,15 @@ const express = require('express')
 const app = express()
 const port = 3000
 const userRoute = require('./Routers/userRouter');
-const ConnectDB = require("./config/Database");
+const mongooes = require("mongoose");
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+mongooes.connect("mongodb://127.0.0.1:27017/NewAPi");
+
 app.use('/',userRoute);
 
-ConnectDB();
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
